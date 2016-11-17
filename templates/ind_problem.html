@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+</br>
+<section id="contact" ondragstart="return false" onselectstart="return false">
+	<div class="container">
+		<!-- <div class="row">
+			<div class="col-lg-12 text-center">
+				<h2>Problems</h2>
+				<hr class="star-primary">
+			</div>
+		</div> -->
+		<div class="row">
+			<div class="row col-sm-8">
+				<h3>{{problem.name}}</h3>
+
+				<div >
+					{{problem.description|safe}}
+				</div>
+
+				<div>Sample TestCase</div>
+				{% for tc in testcases %}
+				<div>
+					<pre>{{tc.input|safe}}</pre>
+					<pre>{{tc.output|safe}}</pre>
+				</div>
+				{% endfor %}
+
+				{% if user.is_authenticated %}
+				<div >
+					<button class="btn btn-success text-center" id="show_testcase">Submit</button>
+				</div>
+				{% endif %}
+			</div>
+
+			<div class="row col-sm-4 text-center">
+				<button class="btn btn-primary text-center">See Your Submission</button>
+			</div>
+
+			</br></br></br>
+			<div class="row col-sm-4 text-center">
+				<button class="btn btn-primary text-center">See Your Submission</button>
+			</div>
+		</div>
+	</div>
+</section>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h2>Testcases</h2>
+				<hr class="star-primary">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="row col-sm-8">
+				<form action="/submission_result/" method="POST" >
+					{% csrf_token %}
+					<input type="text" name="problem" hidden value="{{problem.problem_num}}">
+					<input type="text" name="testcase_number" hidden value="{{h_t}}">
+					{% for t in h_testcases %}
+						<div class="row control-group">
+
+							<div class="form-group col-xs-12 ">
+								<label>Testcase : {{ forloop.counter }}</label>
+								<pre>{{t.input}}</pre>
+								</br>
+								<textarea type="textarea" class="form-control" placeholder="Output for Testcase {{forloop.counter}}" name="{{t.pk}}" autocomplete="off"></textarea>
+							</div>
+						</div>
+					{% endfor %}
+
+					<div >
+						<button class="btn btn-success text-center" id="show_testcase">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	</br>
+<!-- Submission button logged in user / logged out user -->
+{% endblock %}
