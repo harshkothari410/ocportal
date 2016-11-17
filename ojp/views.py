@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+from random import randint
 
 def index(request):
 	# x = ''
@@ -94,14 +95,20 @@ def show_problem(request, problem_num):
 	testcases = TestCase.objects.filter(problem=problem.pk, visible=True)
 	h_testcases = TestCase.objects.filter(problem=problem.pk, visible=False)
 
+	if len(h_testcases) > 5:
+		r = randint(0, len(h_testcases) - 5)
+		h_testcases = h_testcases[r:r+5]
+
+
 	h_t = []
 	for t in h_testcases:
 		h_t.append(str(t.pk))
 
 	h_t = ' '.join(h_t)
-	
+	print h_t
 
 	if request.user.is_authenticated():
+		# user = UserProfile.objects.get(user=request.user)
 		return render(request, 'ind_problem.html', locals())
 	else:
 		return render(request, 'ind_problem.html', locals())

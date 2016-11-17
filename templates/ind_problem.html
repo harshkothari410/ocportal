@@ -26,25 +26,22 @@
 				</div>
 				{% endfor %}
 
-				{% if user.is_authenticated %}
-				<div >
-					<button class="btn btn-success text-center" id="show_testcase">Submit</button>
-				</div>
-				{% endif %}
 			</div>
 
-			<div class="row col-sm-4 text-center">
+			<!-- <div class="row col-sm-4 text-center">
 				<button class="btn btn-primary text-center">See Your Submission</button>
 			</div>
 
 			</br></br></br>
 			<div class="row col-sm-4 text-center">
 				<button class="btn btn-primary text-center">See Your Submission</button>
-			</div>
+			</div> -->
 		</div>
 	</div>
-</section>
 
+
+</section>
+{% if user.is_authenticated %}
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 text-center">
@@ -71,6 +68,7 @@
 						</div>
 					{% endfor %}
 
+
 					<div >
 						<button class="btn btn-success text-center" id="show_testcase">Submit</button>
 					</div>
@@ -78,6 +76,11 @@
 			</div>
 		</div>
 	</div>
+{% else %}
+	<div class="container">
+		<a class="btn btn-success text-center " href="/login/" id="show_testcase">Login to Submit</a>
+	</div>
+{% endif %}
 	</br>
 <!-- Submission button logged in user / logged out user -->
 {% endblock %}
