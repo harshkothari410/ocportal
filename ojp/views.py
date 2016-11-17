@@ -53,7 +53,7 @@ def submission(request):
 				if act_val.output == user_val:
 					correct += 1
 
-			print correct, problem
+			# print correct, problem
 
 			bool_result = True if correct == len(t_s) else False
 
@@ -83,7 +83,7 @@ def show_all_problem(request):
 	if request.user.is_authenticated():
 		for x in xrange(len(problems)):
 			result = problems[x].isSolved(request.user)
-			print result
+			# print result
 			problems[x].result = result
 		return render(request, 'problems.html', locals())
 	else:
@@ -121,8 +121,9 @@ def all_submission(request):
 
 def ind_submission(request, problem_num):
 	if request.user.is_authenticated():
+		user = UserProfile.objects.get(user=request.user)
 		problem = Problem.objects.get(problem_num=problem_num)
-		submissions = Submission.objects.filter(problem=problem.pk).order_by('-timestamp')
+		submissions = Submission.objects.filter(problem=problem.pk, user=user.pk).order_by('-timestamp')
 		problems = 'Submission for problem ' + problem_num
 		flag = False
 		return render(request, 'submission.html', locals())
@@ -140,11 +141,11 @@ def signup(request):
 		password = request.POST['password']
 		ruid = request.POST['ruid']
 
-		print name, username, password, ruid
+		# print name, username, password, ruid
 		try:
 			otheruser = UserProfile.objects.get(username = username)
 			error = 'This username is already exist...'
-			print error
+			# print error
 			return render(request, 'signup.html', locals())
 		except:
 			pass
@@ -152,7 +153,7 @@ def signup(request):
 		try:
 			otheruser = UserProfile.objects.get(ruid = ruid)
 			error = 'This RUID is already exist...'
-			print error
+			# print error
 			return render(request, 'signup.html', locals())
 		except:
 			pass
