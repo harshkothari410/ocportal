@@ -21,7 +21,9 @@
 				<div><b>Sample TestCase</b></div>
 				{% for tc in testcases %}
 				<div>
+					<div><b>Input</b></div>
 					<pre>{{tc.input|safe}}</pre>
+					<div><b>Output</b></div>
 					<pre>{{tc.output|safe}}</pre>
 				</div>
 				{% endfor %}
