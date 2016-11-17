@@ -28,7 +28,7 @@
 						<td>{{ problem.problem_num }}</td>
 						<td><a href='/problem/{{ problem.problem_num }}'>{{ problem.name }}</td>
 						<td>{{ problem.point }}</td>
-						<td>{{ problem.problem_type }}</td>
+						<td>{{ problem.problem_type|title }}</td>
 						{% if problem.num_of_tries == 0%}
 							<td>-</td>
 						{% else %}
