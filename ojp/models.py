@@ -88,6 +88,7 @@ class Submission(models.Model):
 		# update number of correct submission to perticular problem
 		if self.bool_result:
 			self.problem.num_of_correct_tries += 1
+			self.user.num_problem_solved += 1
 
 		super(Submission, self).save(*args, **kwargs)
 		self.user.save()

@@ -18,7 +18,7 @@
 					<th>Problem Title</th>
 					<th>Points</th>
 					<th>Difficulty</th>
-					<th>Accuracy</th>
+					
 					{% if user.is_authenticated %}
 						<th>Solved</th>
 					{% endif %}
@@ -29,11 +29,7 @@
 						<td><a href='/problem/{{ problem.problem_num }}'>{{ problem.name }}</td>
 						<td>{{ problem.point }}</td>
 						<td>{{ problem.problem_type|title }}</td>
-						{% if problem.num_of_tries == 0%}
-							<td>-</td>
-						{% else %}
-							<td>{% widthratio problem.num_of_correct_tries problem.num_of_tries 1 %}</td>
-						{% endif %}
+						
 
 						{% if user.is_authenticated %}
 							<th>{{ problem.result }}</th>

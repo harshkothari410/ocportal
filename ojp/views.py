@@ -82,10 +82,14 @@ def show_all_problem(request):
 	problems = Problem.objects.order_by('problem_num')
 
 	if request.user.is_authenticated():
+
 		for x in xrange(len(problems)):
-			result = problems[x].isSolved(request.user)
+			result = problems[x].isSolved(UserProfile.objects.get(user=request.user))
 			# print result
-			problems[x].result = result
+			if result:
+				problems[x].result = 'Yes'
+			else:
+				problems[x].result = 'No'
 		return render(request, 'problems.html', locals())
 	else:
 		return render(request, 'problems.html', locals())
